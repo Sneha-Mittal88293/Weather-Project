@@ -16,7 +16,6 @@ app.get("/" , function (req , res){
                const description  = weatherData.weather[0].description;
                console.log(description);
 
-
           });
      });
 
