@@ -11,15 +11,20 @@ app.get("/" , function (req , res){
           response.on("data" , function(data){
                const weatherData = JSON.parse(data);
                const temp  = weatherData.main.temp;
-               console.log(temp);
-
-               const description  = weatherData.weather[0].description;
-               console.log(description);
+               const weatherDescription  = weatherData.weather[0].description;
+               const icon = weatherData.weather[0].icon;
+               const imageUrl =  "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+               // in that way we send multiple item  
+               // res.send("<p>The weather is currently " + weatherDescription+ " </p>\n"+" <h1>The temp of landon is " + temp + " degree celsius</h1>");
+               
+               // or we can send also that way
+               res.write("<p>The weather is currently " + weatherDescription+ " </p>");
+               res.write("<h1>The temp of landon is " + temp + " degree celsius</h1>");
+               res.write("<img src =" +imageUrl +">");
+               res.send();
 
           });
      });
-
-       res.send("Server is up and running");
   });
 
 app.listen(3000 , function(){
